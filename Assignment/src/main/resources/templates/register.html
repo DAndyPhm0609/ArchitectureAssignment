@@ -2,11 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register Page</title>
 </head>
 <body>
-<form>
+<h1>Registration Form</h1>
+<form action="/register" method="post">
+    <!-- Name Field -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
 
+    <!-- Password Field -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <!-- Subscription Checkbox -->
+    <label for="subscription">Subscribe:</label>
+    <input type="checkbox" id="subscription" name="subscription" value="true"> Yes<br>
+
+    <!-- Submit Button -->
+    <input type="submit" value="Register">
 </form>
 </body>
 </html>

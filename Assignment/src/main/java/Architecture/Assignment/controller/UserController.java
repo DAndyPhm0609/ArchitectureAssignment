@@ -3,7 +3,10 @@ package Architecture.Assignment.controller;
 import Architecture.Assignment.model.User;
 import Architecture.Assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -16,11 +19,6 @@ public class UserController {
     public String home() {
         return ("Hello home");
     }
-
-//    @GetMapping("/register")
-//    public String register(){
-//        ;
-//    }
 
     @GetMapping("/secured")
     public String secured() {
@@ -48,4 +46,6 @@ public class UserController {
     public User getUserbyID(@PathVariable long id) {
         return userService.getUserByID(id);
     }
+
+
 }

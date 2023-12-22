@@ -5,6 +5,7 @@ import Architecture.Assignment.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -34,4 +35,5 @@ public class UserService {
     public User getUserByID(Long id) {
         return userRepo.findById(id).orElse(null);
     }
+
 }
