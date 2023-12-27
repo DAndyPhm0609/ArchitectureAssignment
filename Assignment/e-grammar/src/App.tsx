@@ -4,6 +4,7 @@ import Home from './Pages/Home'
 import Signup from './Pages/Signup';
 import SubscriptionPage from './Pages/Subscribe';
 import Main from './Pages/Main';
+import Profile from './Pages/Profile';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/subscribe' element={<SubscriptionPage/>}/>
         <Route path='/main' element={<Main/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
     </Router>
   )
