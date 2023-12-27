@@ -3,6 +3,7 @@ import './App.css'
 import Home from './Pages/Home'
 import Signup from './Pages/Signup';
 import SubscriptionPage from './Pages/Subscribe';
+import Main from './Pages/Main';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
         <Route path='/' element={<Home />}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/subscribe' element={<SubscriptionPage/>}/>
+        <Route path='/main' element={<Main/>}/>
       </Routes>
     </Router>
   )
