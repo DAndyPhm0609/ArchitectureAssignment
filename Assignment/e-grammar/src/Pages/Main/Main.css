@@ -1,0 +1,55 @@
+/* Main.css */
+
+/* Style for the centered upload button */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Vertically center content on the page */
+  }
+  
+  .custom-upload-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .upload-icon {
+    width: 100px; /* Adjust the size as needed */
+    height: auto; /* Maintain the aspect ratio of the image */
+    margin-right: 10px; /* Add space between image and text */
+  }
+  
+  .upload-text {
+    font-size: 100px; /* Match the font size to the image width */
+  }
+  
+  /* Style for the fixed profile icon in the top right corner */
+  /* Main.css */
+
+/* Style the profile container */
+.profile-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999; /* Ensure it's above other content */
+  }
+  
+  /* Style the profile button */
+  .profile-button {
+    display: inline-block;
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    overflow: hidden;
+    text-decoration: none; /* Remove underlines from the anchor */
+  }
+  
+  /* Style the profile icon within the button */
+  .profile-icon {
+    width: 100%; /* Make the icon fill the button */
+    height: 100%; /* Make the icon fill the button */
+    object-fit: cover; /* Maintain aspect ratio and cover the button */
+  }
+  
