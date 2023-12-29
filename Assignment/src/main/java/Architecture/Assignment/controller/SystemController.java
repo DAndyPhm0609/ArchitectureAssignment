@@ -8,19 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SystemController {
-    @GetMapping("/register")
-    public String register(){
+    @GetMapping("/registration")
+    public String registration(){
         return ("register");
     }
 
-    @PostMapping("/register")
-    public String registerUser(@RequestParam String name, @RequestParam String password,
-                               @RequestParam(defaultValue = "false") boolean subscription,
-                               Model model){
-        model.addAttribute("name", name);
-        model.addAttribute("password", password);
-        model.addAttribute("subscription", subscription);
-
-        return "registration-confirmation";
+    @GetMapping("/registration_confirm")
+    public String registration_confirm(){
+        return ("registration_confirm");
     }
 }

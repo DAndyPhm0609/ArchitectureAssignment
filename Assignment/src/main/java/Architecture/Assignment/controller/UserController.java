@@ -31,13 +31,13 @@ public class UserController {
     }
 
     @PostMapping("/add_user")
-    public User addBook(@RequestBody User user) {
+    public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
     //API to delete a book by its ID
     @DeleteMapping("/delete/{id}")
-    public String deleteBook(@PathVariable Long id) {
+    public String deleteUser(@PathVariable Long id) {
         return userService.deleteUserByID(id);
     }
 
@@ -47,5 +47,11 @@ public class UserController {
         return userService.getUserByID(id);
     }
 
-
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String name, @RequestParam String password,
+                               Model model){
+        model.addAttribute("name", name);
+        model.addAttribute("password", password);
+        return "registration_confirm";
+    }
 }
