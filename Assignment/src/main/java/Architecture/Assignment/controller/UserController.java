@@ -1,12 +1,10 @@
 package Architecture.Assignment.controller;
 
 import Architecture.Assignment.model.User;
+
 import Architecture.Assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -45,13 +43,5 @@ public class UserController {
     @GetMapping("/get_user/{id}")
     public User getUserbyID(@PathVariable long id) {
         return userService.getUserByID(id);
-    }
-
-    @PostMapping("/register")
-    public String registerUser(@RequestParam String name, @RequestParam String password,
-                               Model model){
-        model.addAttribute("name", name);
-        model.addAttribute("password", password);
-        return "registration_confirm";
     }
 }

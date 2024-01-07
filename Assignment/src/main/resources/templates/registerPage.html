@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+</head>
+<body>
+<h1>Add User</h1>
+<form id="userForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <label for="subscribed">Subscribed:</label>
+    <input type="checkbox" id="subscribed" name="subscribed"><br>
+
+    <button type="button" onclick="addUser()">Add User</button>
+</form>
+
+<script>
+    function addUser() {
+        var name = document.getElementById("name").value;
+        var password = document.getElementById("password").value;
+        var subscribed = document.getElementById("subscribed").checked;
+
+        var user = {
+            "name": name,
+            "password": password,
+            "subscribed": subscribed
+        };
+
+        fetch('/add_user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error, e.g., show an error message to the user
+            });
+    }
+</script>
+</body>
+</html>

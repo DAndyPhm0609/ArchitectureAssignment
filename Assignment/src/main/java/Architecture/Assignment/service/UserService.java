@@ -29,7 +29,7 @@ public class UserService {
 
     public String deleteUserByID(Long Id) {
         userRepo.deleteById(Id);
-        return ("book deleted");
+        return ("user deleted");
     }
 
     public User getUserByID(Long id) {

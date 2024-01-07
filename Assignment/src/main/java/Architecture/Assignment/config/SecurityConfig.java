@@ -15,9 +15,10 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/registration").permitAll();
-                    auth.requestMatchers("/register").permitAll();
                     auth.requestMatchers("/").permitAll();
+                    auth.requestMatchers("/register").permitAll();
+                    auth.requestMatchers("/add_users").permitAll();
+                    auth.requestMatchers("/users").permitAll();
                     auth.anyRequest().authenticated();
 //                    auth.antMatchers("/api/auth/**").permitAll();
 //                    auth.anyRequest().authenticated();
