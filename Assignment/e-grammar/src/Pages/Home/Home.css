@@ -1,0 +1,72 @@
+.home-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #3498db;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  a {
+    color: #3498db;
+    text-decoration: none;
+    display: block;
+    margin-top: 20px;
+  }
+  
+  a:hover {
+    color: #2980b9;
+  }
+  
+.password-options {
+    display: flex;
+    flex-direction: column; /* Display children in a column */
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  button {
+    margin-top: 10px; /* Adjust as needed */
+  }
+  
+  a {
+    color: #3498db;
+    text-decoration: none;
+    margin-top: 10px; /* Adjust as needed */
+  }
+  
+  a:hover {
+    color: #2980b9;
+  }
+  
