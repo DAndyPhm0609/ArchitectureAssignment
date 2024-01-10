@@ -23,25 +23,25 @@ public class UserController {
         return ("Hello secured");
     }
 
-    @GetMapping("/users")
+    @GetMapping("/auth/users")
     public List<User> getUsers() {
         return userService.getUser();
     }
 
-    @PostMapping("/add_user")
+    @PostMapping("/auth/add_user")
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
     //API to delete a book by its ID
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@PathVariable Long id) {
+    public String deleteUser(@PathVariable Integer id) {
         return userService.deleteUserByID(id);
     }
 
     //API to get details of a book by its id
     @GetMapping("/get_user/{id}")
-    public User getUserbyID(@PathVariable long id) {
+    public User getUserbyID(@PathVariable Integer id) {
         return userService.getUserByID(id);
     }
 }

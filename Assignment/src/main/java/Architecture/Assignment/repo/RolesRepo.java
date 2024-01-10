@@ -1,12 +1,13 @@
 package Architecture.Assignment.repo;
 
-import Architecture.Assignment.model.User;
+
+import Architecture.Assignment.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer> {
-    Optional<User> findByUsername(String username);
+public interface RolesRepo extends JpaRepository<Role, Integer> {
+    Optional<Role> findByAuthority(String authority);
 }

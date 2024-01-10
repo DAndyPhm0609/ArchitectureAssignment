@@ -8,8 +8,8 @@
 <body>
 <h1>Add User</h1>
 <form id="userForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br>
+    <label for="username">Name:</label>
+    <input type="text" id="username" name="username" required><br>
 
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required><br>
@@ -22,17 +22,17 @@
 
 <script>
     function addUser() {
-        var name = document.getElementById("name").value;
+        var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
         var subscribed = document.getElementById("subscribed").checked;
 
         var user = {
-            "name": name,
+            "username": username,
             "password": password,
             "subscribed": subscribed
         };
 
-        fetch('/add_user', {
+        fetch('/auth/add_user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
