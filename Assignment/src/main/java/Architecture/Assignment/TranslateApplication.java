@@ -1,6 +1,7 @@
 package Architecture.Assignment;
 
 import Architecture.Assignment.model.User;
+import Architecture.Assignment.model.UserRole;
 import Architecture.Assignment.repo.RolesRepo;
 import Architecture.Assignment.repo.UserRepo;
 import org.springframework.boot.CommandLineRunner;
@@ -19,19 +20,23 @@ public class TranslateApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TranslateApplication.class, args);
 	}
-//	@Bean
-//	CommandLineRunner run(RolesRepo roleRepository, UserRepo userRepository, PasswordEncoder passwordEncode){
-//		return args ->{
-//			if(roleRepository.findByAuthority("ADMIN").isPresent()) return;
-//			Role adminRole = roleRepository.save(new Role("ADMIN"));
-//			roleRepository.save(new Role("USER"));
-//
-//			Set<Role> roles = new HashSet<>();
-//			roles.add(new Role());
-//
-//			User admin = new User(1, "admin", passwordEncode.encode("password"), roles);
-//
-//			userRepository.save(admin);
-//		};
-//	}
+
+	//Command line runner to initialize attribute such as roles, and add 1 admin user into the database.
+	@Bean
+	CommandLineRunner run(RolesRepo rolesRepo, UserRepo userRepo, PasswordEncoder passwordEncode){
+		return args ->{
+			//Add Admin role
+			if(rolesRepo.findByAuthority("ADMIN").isPresent()) return;
+			UserRole adminRole = rolesRepo.save(new UserRole("ADMIN"));
+			rolesRepo.save(new UserRole("USER"));
+
+			Set<UserRole> roles = new HashSet<>();
+			roles.add(adminRole);
+
+			User admin = new User(0, "admin", passwordEncode.encode("pass"), roles);
+			userRepo.save(admin);
+		};
+	}
+
+
 }

@@ -17,6 +17,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
+    @Column(unique = true)
     private String username;
     private String password;
 
@@ -27,16 +28,16 @@ public class User implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name="role_id")}
     )
 
-    private Set<Role> authorities;
+    private Set<UserRole> authorities;
 
     public User(){
         super();
-        this.authorities = new HashSet<Role>();
+        this.authorities = new HashSet<UserRole>();
     }
 
-    public User(Integer userID, String username, String password, Set<Role> authorities){
+    public User(Integer userId, String username, String password, Set<UserRole> authorities){
         super();
-        this.userId = userID;
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
@@ -46,7 +47,7 @@ public class User implements UserDetails {
         return this.authorities;
     }
 
-    public void setAuthorities(Set<Role> authorities) {
+    public void setAuthorities(Set<UserRole> authorities) {
         this.authorities = authorities;
     }
 

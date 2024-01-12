@@ -14,9 +14,6 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required><br>
 
-    <label for="subscribed">Subscribed:</label>
-    <input type="checkbox" id="subscribed" name="subscribed"><br>
-
     <button type="button" onclick="addUser()">Add User</button>
 </form>
 
@@ -24,12 +21,10 @@
     function addUser() {
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
-        var subscribed = document.getElementById("subscribed").checked;
 
         var user = {
             "username": username,
             "password": password,
-            "subscribed": subscribed
         };
 
         fetch('/auth/add_user', {

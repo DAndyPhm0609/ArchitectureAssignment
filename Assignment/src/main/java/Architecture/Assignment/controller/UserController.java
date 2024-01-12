@@ -1,7 +1,10 @@
 package Architecture.Assignment.controller;
 
+import Architecture.Assignment.model.RegisterObject;
 import Architecture.Assignment.model.User;
 
+import Architecture.Assignment.model.UserRole;
+import Architecture.Assignment.repo.RolesRepo;
 import Architecture.Assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,18 +12,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/")
+    @Autowired
+    RolesRepo rolesRepo;
+
+    @GetMapping("/user/home")
     public String home() {
-        return ("Hello home");
+        return ("Hello user");
     }
 
-    @GetMapping("/secured")
+    @GetMapping("/admin/home")
     public String secured() {
-        return ("Hello secured");
+        return ("Hello admin");
     }
 
     @GetMapping("/auth/users")
@@ -28,9 +35,12 @@ public class UserController {
         return userService.getUser();
     }
 
+    @GetMapping("/auth/roles")
+    public List<UserRole> getRoles(){ return rolesRepo.findAll();}
+
     @PostMapping("/auth/add_user")
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    public User addUser(@RequestBody RegisterObject registerObject) {
+        return userService.addUser(registerObject.getUsername(), registerObject.getPassword());
     }
 
     //API to delete a book by its ID
