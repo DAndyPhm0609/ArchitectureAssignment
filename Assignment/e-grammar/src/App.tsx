@@ -7,7 +7,6 @@ import Main from './Pages/Main';
 import Profile from './Pages/Profile';
 
 function App() {
-
   return (
     <Router>
       <Routes>
