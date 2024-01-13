@@ -17,4 +17,14 @@ public class SystemController {
     public String login() {
         return "login";
     }
+
+    @GetMapping("/user/home")
+    public String home() {
+        return ("Hello user");
+    }
+
+    @GetMapping("/admin/home")
+    public String secured() {
+        return ("Hello admin");
+    }
 }

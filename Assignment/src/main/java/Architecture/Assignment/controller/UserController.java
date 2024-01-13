@@ -20,15 +20,7 @@ public class UserController {
     @Autowired
     RolesRepo rolesRepo;
 
-    @GetMapping("/user/home")
-    public String home() {
-        return ("Hello user");
-    }
 
-    @GetMapping("/admin/home")
-    public String secured() {
-        return ("Hello admin");
-    }
 
     @GetMapping("/auth/users")
     public List<User> getUsers() {
