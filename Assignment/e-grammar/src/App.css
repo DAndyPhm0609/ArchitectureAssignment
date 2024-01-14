@@ -1,0 +1,23 @@
+.container {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-upload-button {
+  display: inline-block;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  padding: 10px 20px; /* Button padding */
+  border: none;
+  cursor: pointer;
+  border-radius: 5px; /* Button border radius */
+}
+
+/* Style the file input to be hidden */
+.custom-upload-button input[type="file"] {
+  display: none;
+}
