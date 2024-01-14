@@ -8,7 +8,6 @@ import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } f
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
     password: '',
     confirmPassword: '',
   });
@@ -20,10 +19,45 @@ const Signup: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // Handle form submission logic here
+  //   console.log('Form data submitted:', formData);
+  // };
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form data submitted:', formData);
+    // Check if the form all has details
+    if (!formData.username || !formData.password) {
+      alert('Please fill in all fields.');
+      return; // Exit the function if any field is empty
+    }
+
+    if (formData.password.length < 8) {
+      alert('Password must be at least 8 characters long.');
+      return; // Exit the function if the password is too short
+    }
+
+    try {
+      //Using the api to post the formData to the database after turning it into json.
+      const response = await fetch( 'http://localhost:8081/auth/add-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Alert the user when they successfuly create a new account
+        window.location.href = '/logins'
+        alert('User registered successfully!');
+      } else {
+        // Alert the user when they failed to create a new account
+        alert('User registration failed.');
+      }
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   };
   
   const handleGoogleLogin = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
@@ -60,17 +94,6 @@ const Signup: React.FC = () => {
               id="username"
               name="username"
               value={formData.username}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
               onChange={handleChange}
               required
             />
