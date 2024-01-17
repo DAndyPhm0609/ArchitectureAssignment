@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
-import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
-
-
 
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -20,10 +17,40 @@ const Signup: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form data submitted:', formData);
+    // Check if the form all has details
+    if (!formData.username || !formData.password) {
+      alert('Please fill in all fields.');
+      return; // Exit the function if any field is empty
+    }
+
+    if (formData.password.length < 8) {
+      alert('Password must be at least 8 characters long.');
+      return; // Exit the function if the password is too short
+    }
+
+    try {
+      //Using the api to post the formData to the database after turning it into json.
+      const response = await fetch( 'http://localhost:8081/auth/add_user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Alert the user when they successfuly create a new account
+        window.location.href = '/'
+        alert('User registered successfully!');
+      } else {
+        // Alert the user when they failed to create a new account
+        alert('User registration failed.');
+      }
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   };
   
   const handleGoogleLogin = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
@@ -34,19 +61,6 @@ const Signup: React.FC = () => {
     }
   };
 
-  const handleFacebookLogin = (userInfo: ReactFacebookLoginInfo | ReactFacebookFailureResponse) => {
-    // Handle the Facebook login response here
-    console.log('Facebook login response:', userInfo);
-    if ('id' in userInfo) {
-      // Successful Facebook login
-      console.log('User ID:', userInfo.id);
-      console.log('Name:', userInfo.name);
-      console.log('Email:', userInfo.email);
-    } else if ('errorMessage' in userInfo) {
-      // Facebook login failed
-      console.error('Facebook login failed:', userInfo.errorMessage);
-    }
-  };
   
   return (
     <div className="signup-container">
@@ -60,17 +74,6 @@ const Signup: React.FC = () => {
               id="username"
               name="username"
               value={formData.username}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
               onChange={handleChange}
               required
             />
@@ -111,14 +114,6 @@ const Signup: React.FC = () => {
           onSuccess={handleGoogleLogin}
           onFailure={handleGoogleLogin}
           cookiePolicy={'single_host_origin'}
-        />
-
-        {/* Login with Facebook button */}
-        <FacebookLogin
-          appId="YOUR_FACEBOOK_APP_ID"
-          fields="name,email,picture"
-          callback={handleFacebookLogin}
-          textButton="Login with Facebook"
         />
       </div>
 
