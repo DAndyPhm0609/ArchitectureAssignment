@@ -19,11 +19,7 @@ const Signup: React.FC = () => {
     });
   };
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   // Handle form submission logic here
-  //   console.log('Form data submitted:', formData);
-  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Check if the form all has details
@@ -39,7 +35,7 @@ const Signup: React.FC = () => {
 
     try {
       //Using the api to post the formData to the database after turning it into json.
-      const response = await fetch( 'http://localhost:8081/auth/add-user', {
+      const response = await fetch( 'http://localhost:8081/auth/add_user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +45,7 @@ const Signup: React.FC = () => {
 
       if (response.ok) {
         // Alert the user when they successfuly create a new account
-        window.location.href = '/logins'
+        window.location.href = '/'
         alert('User registered successfully!');
       } else {
         // Alert the user when they failed to create a new account

@@ -21,4 +21,7 @@ public class RegisterObject {
     public void setPassword(String password){
         this.password = password;
     }
+    public String toString(){
+        return "Registration info: username: " + this.username + " password: " + this.password;
+    }
 }

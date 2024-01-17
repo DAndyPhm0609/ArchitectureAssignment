@@ -7,12 +7,16 @@ import Architecture.Assignment.model.UserRole;
 import Architecture.Assignment.repo.RolesRepo;
 import Architecture.Assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
-@CrossOrigin("*")
+@CrossOrigin
 public class UserController {
     @Autowired
     UserService userService;
@@ -20,7 +24,15 @@ public class UserController {
     @Autowired
     RolesRepo rolesRepo;
 
+    @GetMapping("/user/home")
+    public String home() {
+        return ("Hello user");
+    }
 
+    @GetMapping("/admin/home")
+    public String secured() {
+        return ("Hello admin");
+    }
 
     @GetMapping("/auth/users")
     public List<User> getUsers() {
@@ -34,6 +46,8 @@ public class UserController {
     public User addUser(@RequestBody RegisterObject registerObject) {
         return userService.addUser(registerObject.getUsername(), registerObject.getPassword());
     }
+
+
 
     //API to delete a book by its ID
     @DeleteMapping("/delete/{id}")

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Home.css"
 
 import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import FacebookLogin, { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
 
 const Home: React.FC = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
   const handleGoogleLogin = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
     console.log('Google login response:', response);
     const profile = 'profileObj' in response ? response.profileObj : null;
@@ -26,7 +28,30 @@ const Home: React.FC = () => {
       console.error('Facebook login failed:', userInfo.errorMessage);
     }
   };
-  
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:8081/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Login successful', data);
+            // Handle successful login, e.g., redirect to dashboard
+        } catch (error) {
+            console.error('Login failed');
+            // Handle login failure, e.g., show error message
+        }
+    };
   
 
   return (
@@ -49,13 +74,18 @@ const Home: React.FC = () => {
         />
 
       <p>Or use your E-grammar account</p>
-
-      <form>
-        <input type="text" placeholder="Username" required />
-        <input type="password" placeholder="Password" required />
+      <form onSubmit={handleSubmit}>
+          <label>
+              Username:<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+          </label>
+          <br />
+          <label>
+              Password:<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+          </label>
+        {/*<input type="text" placeholder="Username" required />*/}
+        {/*<input type="password" placeholder="Password" required />*/}
         <div className="password-options">
           <button type="submit">Login</button>
-          <a href="/forgot-password">Forgot Password?</a>
         </div>
       </form>
 

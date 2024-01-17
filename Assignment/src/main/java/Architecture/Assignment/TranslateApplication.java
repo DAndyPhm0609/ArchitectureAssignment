@@ -23,7 +23,7 @@ public class TranslateApplication {
 
 	//Command line runner to initialize attribute such as roles, and add 1 admin user into the database.
 	@Bean
-	CommandLineRunner run(RolesRepo rolesRepo, UserRepo userRepo, PasswordEncoder passwordEncode){
+	CommandLineRunner run(RolesRepo rolesRepo, UserRepo userRepo ){
 		return args ->{
 			//Add Admin role
 			if(rolesRepo.findByAuthority("ADMIN").isPresent()) return;
@@ -33,7 +33,7 @@ public class TranslateApplication {
 			Set<UserRole> roles = new HashSet<>();
 			roles.add(adminRole);
 
-			User admin = new User(0, "admin", passwordEncode.encode("pass"), roles);
+			User admin = new User(0, "admin", "password", roles);
 			userRepo.save(admin);
 		};
 	}
