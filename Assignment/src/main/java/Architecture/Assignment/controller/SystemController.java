@@ -13,8 +13,18 @@ public class SystemController {
     }
 
     //Api to go to login page
-    @GetMapping("/auth/login")
+    @GetMapping("/auth/loginPage")
     public String login() {
-        return "login";
+        return "loginPage";
+    }
+
+    @GetMapping("/user/home")
+    public String home() {
+        return ("Hello user");
+    }
+
+    @GetMapping("/admin/home")
+    public String secured() {
+        return ("Hello admin");
     }
 }
