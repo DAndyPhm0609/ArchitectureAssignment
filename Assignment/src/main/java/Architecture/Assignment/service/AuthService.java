@@ -49,10 +49,10 @@ public class AuthService {
                     new UsernamePasswordAuthenticationToken(username, password)
             );
 
-            return new LoginResponseDTO(userRepo.findByUsername(username).get());
+            return new LoginResponseDTO(userRepo.findByUsername(username).get(), true);
 
         } catch(AuthenticationException e){
-            return new LoginResponseDTO(null);
+            return new LoginResponseDTO(null, false);
         }
     }
 }

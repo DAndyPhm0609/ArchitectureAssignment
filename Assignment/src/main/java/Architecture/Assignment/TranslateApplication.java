@@ -33,7 +33,7 @@ public class TranslateApplication {
 			Set<UserRole> roles = new HashSet<>();
 			roles.add(adminRole);
 
-			User admin = new User(0, "admin", passwordEncode.encode("pass"), roles);
+			User admin = new User(0, "admin", passwordEncode.encode("password"), roles);
 			userRepo.save(admin);
 		};
 	}

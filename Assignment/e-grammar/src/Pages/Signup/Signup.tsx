@@ -5,7 +5,6 @@ import { GoogleLogin, GoogleLoginResponse, GoogleLoginResponseOffline } from 're
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
     password: '',
     confirmPassword: '',
   });
@@ -28,6 +27,11 @@ const Signup: React.FC = () => {
     if (formData.password.length < 8) {
       alert('Password must be at least 8 characters long.');
       return; // Exit the function if the password is too short
+    }
+
+    if(formData.password != formData.confirmPassword){
+      alert('Confirm password does not match with the password');
+      return;
     }
 
     try {
@@ -67,38 +71,11 @@ const Signup: React.FC = () => {
       <div className="signup-form">
         <h1>Create an Account</h1>
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
+          <div className="input-group"><label htmlFor="username">Username</label><input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required/>
           </div>
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+          <div className="input-group"><label htmlFor="password">Password</label><input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required/>
           </div>
-          <div className="input-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
+          <div className="input-group"><label htmlFor="confirmPassword">Confirm Password</label><input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required/>
           </div>
           <button type="submit">Sign Up</button>
         </form>
